@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="shortcut icon" href="../img-contacto-detalle/logoGOZO.png" type="image/x-icon">
+  <link rel="stylesheet" href="../style/perfil.css">
+
+  <title>Gozo | Perfil de usuarios</title>
+</head>
+<body>
+    <div id="app">
+      <header>
+        <nav id="navbar" class="navbar navbar-default navbar-light flex-grow fixed-top navbar-expand-lg nav-interno_home">  
+            <div class="container-fluid d-flex navContent navbar-expand-lg justify-content-between container">
+                <img src="../images/logo.png" alt="logo" class="logo-navbar w-25">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ancors-navbar" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="navbar-brand text-white" href="../../index.html" class="a-nav">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-white" href="./accesorios.html" class="a-nav">Accessorios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-white" href="./cultivo.html" class="a-nav">Cultivo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-white" href="./tabacos.html" class="a-nav">Tabacos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand text-white" href="./contacto.html" class="a-nav">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+        <main>
+            <div class="container2 w-75 d-flex justify-content-center">
+              <div class="right tab-content col-10 d-flex flex-column align-items-center">
+                <h2 class="text-center">Editar informacion del usuario</h2>
+                <form @submit.prevent class="form-horizontal col-12">
+                  <div class="form-group">
+                    <label for="nombre" class=" control-label">Nombre</label>
+                    <div class="mt-2">
+                      <input v-model="datos.nombre"  type="text" class="form-control w-100" id="nombre" placeholder="Nombre">
+                    </div>
+                  </div>
+                    <div class="form-group">
+                        <label for="apellido" class=" control-label">Apellido</label>
+                        <div class="mt-2 ">
+                          <input v-model="datos.apellido"  type="text" class="form-control" id="apellido" placeholder="Apellido">
+                        </div>
+                      </div>
+                  <div class="form-group">
+                    <label for="email" class=" control-label">Email</label>
+                    <div class="mb-2 mt-2">
+                      <input v-model="datos.email" type="email" class="form-control" id="email" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="telefono"  class="control-label">Telefono</label>
+                    <div >
+                      <input v-model="datos.telefono" type="text" class="form-control" id="telefono" placeholder="3425877543">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="edad"  class="control-label">Edad</label>
+                    <div >
+                      <input v-model="datos.edad" type="text" class="form-control" id="edad" placeholder="25">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="direcion" class=" control-label">Direcion de Envio</label>
+                    <div >
+                      <input v-model="datos.direccion" type="adress" class="form-control" id="direcion" placeholder="Pellegrini 3587">
+                    </div>
+                  </div>
+                  <div class="form-group align-self-center">
+                    <div class="w-100 d-flex justify-content-center">
+                      <button type="submit" class="btn buton text-white" @click="confirmar">Guardar Cambios</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </main>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="../script/perfil.js"></script>
+</body>
+</html>

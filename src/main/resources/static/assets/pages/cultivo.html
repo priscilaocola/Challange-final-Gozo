@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="../images/logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="../style/productos.css">
+    <script src="https://kit.fontawesome.com/ac7a6b20e0.js" crossorigin="anonymous"></script>
+    <title>Gozo | Cultivo</title>
+</head>
+
+<body>
+    <div id="app" class="layout">
+        <div class="container-loader" id="container-loader">
+            <img src="../images/logo.png" alt="" class="w-25">
+            <div class="loader">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        <header>
+            <nav id="navbar"
+                class="navbar navbar-default navbar-light flex-grow fixed-top navbar-expand-lg nav-interno_home">
+                <div class="container-fluid d-flex navContent navbar-expand-lg justify-content-between container">
+                    <img src="../images/logo.png" alt="logo" class="logo-navbar w-25">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ancors-navbar" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="../../index.html" class="a-nav">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./accesorios.html"
+                                    class="a-nav">Accessorios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="#" class="a-nav">Cultivo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./tabacos.html" class="a-nav">Tabacos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./contacto.html" class="a-nav">Contacto</a>
+                            </li>
+                            <li v-show="cliente.email === 'admin-gozogrowshop@gmail.com'" class="nav-item">
+                                <a class="navbar-brand text-white" href="../../manager.html" class="a-nav">Manager</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex justify-content-start gap-2">
+                            <span v-if="logged" class="d-flex justify-content-center gap-2">
+                                <i class="bi bi-person-circle text-white icons-navbar"></i>
+                                <a class="text-white text-danger btn btn-success a-nombre" href="./perfil.html">
+                                    <p class="mt-1 mb-0">{{cliente.nombre}}</p>
+                                </a>
+                                <button class="btn btn-success" @click="logout()"><i
+                                        class="bi bi-box-arrow-left text-white"></i></button>
+                            </span>
+                            <span v-if="!logged" class="text-center d-flex align-items-center">
+                                <a href="./login.html" class="btn btn-success mx-2">Ingresar</a>
+                            </span>
+
+                            <a href="./carrito.html"><i class="bi bi-cart-fill text-white icons-navbar"></i><span
+                                    class="badge bg-danger">{{ cantidadProductosCarrito }}</span>
+
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="montoTotal p-2 m-2" v-if="totalPrecioProductos != 0">
+            <p style="margin-bottom: 8px;">Monto Total:</p>
+            <p style="margin-bottom: 0px;"> {{ format.format(totalPrecioProductos) }}</p>
+        </div>
+
+        <main class="col-12 d-flex flex-column align-items-center">
+            <div class="col-12 categoria-cultivo">
+            </div>
+            <div class="p-5 col-12">
+                <h2 class="mb-4">Cultivo</h2>
+                <p class="my-3">
+                    Aquí encontrarás todo lo que necesitas para llevar tus cultivos al siguiente nivel. Nuestra amplia
+                    selección de productos te permitirá cultivar de manera eficiente y exitosa, ya sea que seas un
+                    agricultor experimentado o un entusiasta de la jardinería.
+                </p>
+            </div>
+
+            <div class="p-5 col-12 d-flex flex-column flex-wrap">
+                <h4 class="fs-2">Filtrar por categoría</h4>
+                <div class="d-flex filtros justify-content-center pt-4 gap-5 col-12">
+                    <div v-for="categoria of categoriasCultivo" style="height: 1rem;" class="form-check">
+                        <input class="form-check-input me-2" style="height: 1.5rem; width: 1.5rem;" type="checkbox"
+                            :name="categoria" v-model="checkedCheckbox" :value="categoria" :id="categoria"
+                            @change="filtroBusquedaCultivo">
+                        <label class="form-check-label" :for="categoria">
+                            <p>{{categoria}}</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <section class="col-11 d-flex gap-3 justify-content-start flex-wrap productos">
+                <div v-for="item of filtroCultivo" class="card mt-5 me-3 p-2">
+                    <div class="card-img pb-1"><img class="pb-2" :src="item.imagen" alt=""></div>
+                    <div class="card-title">{{item.nombre}}</div>
+                    <div class="card-footer bg-warning">
+                        <div class="card-price">{{format.format(item.precio)}}</div>
+                        <button class="card-btn" @click="toggleSeleccion(item.id)">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                :class="seleccionadas.some(e => e.id == item.id) ? 'bi bi-shop-window text-primary' : 'bi bi-shop-window'"
+                                viewBox="0 0 512 512">
+                                <path
+                                    d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                </path>
+                                <path
+                                    d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                </path>
+                                <path
+                                    d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                </path>
+                                <path
+                                    d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                </path>
+                            </svg>
+                        </button>
+                        <button type="button" @click="mostrarModal(item)" class="btn btn-primary btn-info"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-circle-info fa-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                v-if="productoSeleccionado" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ productoSeleccionado.nombre }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center">
+                                <img :src="productoSeleccionado.imagen" class="w-50" alt="Imagen del producto">
+                            </div>
+                            <p>Precio: {{format.format(productoSeleccionado.precio) }}</p>
+                            <p>Marca: {{ productoSeleccionado.marca }}</p>
+                            <p>Cantidad disponible: {{ productoSeleccionado.cantidad }}</p>
+                            <p>Categoria: {{productoSeleccionado.categoria}}</p>
+                            <p>Subcateogria:{{productoSeleccionado.subcategoria}} </p>
+                            <p>Descripción:</p>
+                            <p class="text-center">{{ productoSeleccionado.descripcion }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="card-btn" @click="toggleSeleccion(productoSeleccionado.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    :class="seleccionadas.some(e => e.id == productoSeleccionado.id) ? 'bi bi-shop-window text-primary' : 'bi bi-shop-window'"
+                                    viewBox="0 0 512 512">
+                                    <path
+                                        d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+                                    </path>
+                                    <path
+                                        d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                    </path>
+                                    <path
+                                        d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z">
+                                    </path>
+                                    <path
+                                        d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+                                    </path>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <article class="col-11 d-flex recomendados justify-content-around flex-wrap">
+                <div class="col-xs-10 col-sm-10 col-lg-4 d-flex justify-content-center align-items-center flex-column">
+                    <div class="w-75 d-flex flex-column">
+                        <h2 class="">También te puede interesar</h2>
+                        <hr class="card-divider">
+                        <p>Todo lo que buscas, y más</p>
+                        <a class="text-danger text-decoration-none" href="./accesorios.html">
+                            <p>Ir a accesorios</p>
+                        </a>
+                    </div>
+                </div>
+                <div
+                    class="col-xs-10 col-sm-8 col-lg-8 d-flex recomendadosResponsive flex-wrap gap-3 p-5 justify-content-center">
+                    <div class="card2">
+                        <div class="card-img pb-1">
+                            <a href="../pages/accesorios.html"><img class="pb-2"
+                                    src="https://parainfernalia.com.ar/wp-content/uploads/2019/04/tabaco-cerrito-original-45gr-growshop.png"
+                                    alt=""></a>
+                        </div>
+                        <div class="card-title">Encendedor Electrico Recargable</div>
+                    </div>
+                    <div class="card2">
+                        <div class="card-img pb-1">
+                            <a href="../pages/accesorios.html"><img class="pb-2"
+                                    src="https://http2.mlstatic.com/D_NQ_NP_692930-MLA54713042265_032023-O.webp"
+                                    alt=""></a>
+                        </div>
+                        <div class="card-title">Encendedor Tipo Zippo Jack Daniels</div>
+                    </div>
+                    <div class="card2">
+                        <div class="card-img pb-1">
+                            <a href="../pages/accesorios.html"><img class="pb-2"
+                                    src="https://http2.mlstatic.com/D_NQ_NP_755684-MLA54056565531_022023-O.webp"
+                                    alt=""></a>
+                        </div>
+                        <div class="card-title">Encendedor Tipo Zippo Tornasolado</div>
+                    </div>
+                </div>
+
+            </article>
+        </main>
+        <footer class="d-flex justify-content-around align-items-center">
+
+            <div class="d-flex flex-column align-items-center">
+                <h3 class="text-warning text-footer mt-2">somosgozo@gmail.com</h3>
+                <div class="card3 flex-row">
+                    <a href="https://www.instagram.com/somosgozo/" class="socialContainer containerOne">
+                        <svg class="socialSvg instagramSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="https://twitter.com/home" class="socialContainer containerTwo">
+                        <svg class="socialSvg twitterSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                            </path>
+                        </svg> </a>
+
+                    <a href="https://l.instagram.com/?u=https%3A%2F%2Fwa.link%2F4zqe4e&e=AT3nPINRtJrrOHSX7L_KGOiYT9p96jsf3IWBZKWGT1mwY4HiFXsRJiDHCfpFwi9lVh7kSYOZhewH-EHD0ooP3tUlDuMPpPqddu8pkowNSHm4iHKJyzQWrg"
+                        class="socialContainer containerFour">
+                        <svg class="socialSvg whatsappSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="d-flex flex-column text-center">
+                <h1 class="text-mamacultiva text-white">GOZO GROWSHOP</h1>
+            </div>
+
+
+            <iframe class="iframe-footer"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350541.2441726234!2d-60.9239008000447!3d-34.90612493204253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95cc42e58c8a51bf%3A0xcaabe31bc8c5cd4!2sSan%20Luis%201131%2C%20Villa%20Mar%C3%ADa%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1690666721375!5m2!1ses-419!2sar"
+                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </footer>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="../script/cultivo.js"></script>
+</body>
+
+</html>

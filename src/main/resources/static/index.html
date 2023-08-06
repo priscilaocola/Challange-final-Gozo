@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./assets/style/index.css">
+    <title>GOZO GrowShop</title>
+
+
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/x-icon">
+
+    <!-- transiciones -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container-loader" id="container-loader"> <img src="./assets/images/logo.png" alt="" class="w-25">
+            <div class="loader"> <span class="dot"></span> <span class="dot"></span> <span class="dot"></span> </div>
+        </div>
+        <header>
+            <nav id="navbar"
+                class="navbar navbar-default navbar-light flex-grow fixed-top navbar-expand-lg nav-interno_home">
+                <div class="container-fluid d-flex navContent navbar-expand-lg justify-content-between container">
+                    <img src="./assets/images/logo.png" alt="logo" class="logo-navbar w-25">
+                    <button class="navbar-toggler m-0 text-white" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse ancors-navbar" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="#" class="a-nav">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./assets/pages/accesorios.html"
+                                    class="a-nav">Accessorios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./assets/pages/cultivo.html"
+                                    class="a-nav">Cultivo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./assets/pages/tabacos.html"
+                                    class="a-nav">Tabacos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="navbar-brand text-white" href="./assets/pages/contacto.html"
+                                    class="a-nav">Contacto</a>
+                            </li>
+                            <li v-show="cliente.email === 'admin-gozogrowshop@gmail.com'" class="nav-item">
+                                <a class="navbar-brand text-white" href="./manager.html" class="a-nav">Manager</a>
+                            </li>
+
+                        </ul>
+                        <div class="d-flex justify-content-start gap-2">
+                            <span v-if="logged" class="d-flex justify-content-center gap-2">
+                                <i class="bi bi-person-circle text-white icons-navbar"></i>
+                                <a class="text-white text-danger btn btn-success a-nombre"
+                                    href="./assets/pages/perfil.html">
+                                    <p class="mt-1 mb-0">{{cliente.nombre}}</p>
+                                </a>
+                                <button class="btn btn-success" @click="logout()"><i
+                                        class="bi bi-box-arrow-left text-white"></i></button>
+                            </span>
+                            <span v-if="!logged" class="text-center d-flex align-items-center">
+                                <a href="./assets/pages/login.html" class="btn btn-success mx-2">Ingresar</a>
+                            </span>
+
+                            <a href="./assets/pages/carrito.html">
+                                <i class="bi bi-cart-fill text-white icons-navbar"></i>
+                                <span class="badge bg-danger">{{ cantidadProductosCarrito }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section class="section-carousel">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="./assets/images/gozoLocal.JPEG" class="d-block w-100 img-carrousel img-magicCube"
+                            alt="">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://i.shgcdn.com/c2b8a60c-cceb-481f-b7a3-be68568885ef/-/format/auto/-/preview/3000x3000/-/quality/lighter/"
+                            class="d-block w-100 img-carrousel" alt="...">
+                        <span class="span-carousel">
+                            <h2 class="text-white">VAPE</h2>
+                            <h1 class="text-white">PUFF BOX</h1>
+                        </span>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Cigarette_rolling_papers_%288%29.JPG"
+                            class="d-block w-100 img-carrousel" alt="...">
+                        <span class="span-carousel">
+                            <h2 class="text-white">SEDAS</h2>
+                            <h1 class="text-white">SMOKING</h1>
+                        </span>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="./assets/images/gozoSmokeShop.JPEG" class="d-block w-100 img-carrousel" alt="...">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <main>
+            <div class="d-flex div-marcas col-12 w-100">
+                <div class="items-marcas text-center d-flex align-items-center justify-content-center item-1"><img
+                        class="img-item" src="./assets/images/rawlogo.png" alt="">
+                </div>
+                <div class="items-marcas text-center item-2"><img class="img-item"
+                        src="./assets/images/lionrollingcircuslogo.png" alt="">
+                </div>
+                <div class="items-marcas text-center item-3 d-flex align-items-center justify-content-center"><img
+                        class="img-item" src="./assets/images/logo.png" alt="" src="">
+                </div>
+                <div class="items-marcas text-center item-4 d-flex align-items-center justify-content-center"><img
+                        class="img-item" src="./assets/images/ocblogo.png" alt="">
+                </div>
+                <div class="items-marcas text-center item-5 d-flex align-items-center justify-content-center"><img
+                        class="img-item" src="./assets/images/topcrop.png" alt=""></div>
+            </div>
+            <section>
+                <div class="col-12 d-flex div-mamacultiva" data-aos="zoom-in" data-aos-duration="1500">
+                    <img src="https://doprod-statics.s3.amazonaws.com/pictures/logo/4326/large_fit_e321b968-f122-425e-949e-b0f76a90b0cb.png"
+                        class="col-6 mamacultiva" alt="...">
+                    <div class="col-6 bg-mamacultiva d-flex justify-content-center align-items-center flex-column">
+                        <h1 class="text-mamacultiva text-white">MAMÁ CULTIVA</h1>
+                        <h6 class="p-mamacultiva text-white w-75">SE PARTE DE LA COMUNIDAD <a
+                                href="https://mamacultivaargentina.org" class="a-mamacultiva">MCA</a> Y APORTA CON TU
+                            GRANITO DE ARENA</span>.
+                        </h6>
+                        <h6 class="p-mamacultiva text-white w-75">10% DE LAS GANANCIAS DE GOZO SERÁN DONADAS A MAMÁ
+                            CULTIVA
+                            ARGENTINA
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-12 d-flex div-mamacultiva" data-aos="zoom-in" data-aos-duration="1500">
+
+                    <div class="col-6 bg-apurogozo d-flex justify-content-center align-items-center flex-column">
+                        <h1 class="text-mamacultiva text-white">LA ALEGRIA SE COMPARTE</h1>
+                        <h6 class="p-mamacultiva text-white w-75 text-center">EN GOZO, CREEMOS FIRMEMENTE QUE LA ALEGRÍA
+                            SE
+                            COMPARTE Y
+                            FLORECE CUANDO CULTIVAMOS JUNTOS.
+                        </h6>
+                        <h6 class="p-mamacultiva text-white w-75 text-center">NOS APASIONA PROPORCIONARTE TODO LO QUE
+                            NECESITAS PARA
+                            DISFRUTAR DE TU EXPERIENCIA DE CULTIVO AL MÁXIMO.
+                        </h6>
+                    </div>
+                    <img src="./assets/images/apurogozo.JPG" class="col-6 mamacultiva" alt="...">
+                </div>
+
+                <div class="div-ilustraciones">
+                    <div class="d-flex flex-wrap col-12 bg-secondary ilustraciones" data-aos="fade-up"
+                        data-aos-duration="2000">
+                        <img class="col-xs-10 col-sm-6 col-md-6 col-lg-3" src="./assets/images/ilustracionGozo.JPG"
+                            alt="">
+                        <img class="col-xs-10 col-sm-6 col-md-6 col-lg-3" src="./assets/images/ilustracionGozo2.JPG"
+                            alt="">
+                        <img class="col-xs-10 col-sm-6 col-md-6 col-lg-3" src="./assets/images/ilustracionGozo3.JPG"
+                            alt="">
+                        <img class="col-xs-10 col-sm-6 col-md-6 col-lg-3" src="./assets/images/ilustracionGozo4.JPG"
+                            alt="">
+                    </div>
+                    <div class="d-flex flex-wrap col-12 bg-secondary ilustraciones" data-aos="fade-up"
+                        data-aos-duration="2000">
+                        <img class=" col-xs-10 col-sm-6 col-lg-3" src="./assets/images/ilustracionGozo5.JPG" alt="">
+                        <img class="col-xs-10 col-sm-6 col-lg-3" src="./assets/images/somosGozo.JPG" alt="">
+                        <img class="col-xs-10 col-sm-6 col-lg-3" src="./assets/images/stanGozo.JPG" alt="">
+                        <img class="col-xs-10 col-sm-6 col-lg-3" src="./assets/images/articuloGozo.JPG" alt="">
+                    </div>
+                </div>
+
+
+
+
+            </section>
+        </main>
+
+        <footer class="d-flex justify-content-around align-items-center">
+
+            <div class="d-flex flex-column align-items-center">
+                <h3 class="text-warning text-footer mt-2">somosgozo@gmail.com</h3>
+                <div class="card flex-row">
+                    <a href="https://www.instagram.com/somosgozo/" class="socialContainer containerOne">
+                        <svg class="socialSvg instagramSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a href="https://twitter.com/home" class="socialContainer containerTwo">
+                        <svg class="socialSvg twitterSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z">
+                            </path>
+                        </svg> </a>
+
+                    <a href="https://l.instagram.com/?u=https%3A%2F%2Fwa.link%2F4zqe4e&e=AT3nPINRtJrrOHSX7L_KGOiYT9p96jsf3IWBZKWGT1mwY4HiFXsRJiDHCfpFwi9lVh7kSYOZhewH-EHD0ooP3tUlDuMPpPqddu8pkowNSHm4iHKJyzQWrg"
+                        class="socialContainer containerFour">
+                        <svg class="socialSvg whatsappSvg" viewBox="0 0 16 16">
+                            <path
+                                d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="d-flex flex-column text-center">
+                <h1 class="text-mamacultiva text-white">GOZO GROWSHOP</h1>
+            </div>
+
+
+            <iframe class="iframe-footer"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350541.2441726234!2d-60.9239008000447!3d-34.90612493204253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95cc42e58c8a51bf%3A0xcaabe31bc8c5cd4!2sSan%20Luis%201131%2C%20Villa%20Mar%C3%ADa%2C%20C%C3%B3rdoba!5e0!3m2!1ses-419!2sar!4v1690666721375!5m2!1ses-419!2sar"
+                width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./assets/script/index.js"></script>
+    <!-- transiciones -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+
+</html>

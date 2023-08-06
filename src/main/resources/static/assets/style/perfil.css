@@ -1,0 +1,305 @@
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Ubuntu&family=Ysabeau+SC&display=swap%27");
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&family=Red+Hat+Display&family=Rowdies&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url(../images/gozoLocal.JPEG) center center no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+ 
+}
+main{
+  width: 100vw;
+}
+
+/* NAVBAR */
+.logo-navbar {
+  width: 160px;
+}
+nav {
+  min-height: 6rem;
+  flex-grow: 1 !important;
+}
+.navbar-default {
+  background: rgba(50, 50, 50, 0);
+  border-color: transparent;
+  padding: 20px 0px;
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  transition: all ease-in-out 0.7s;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
+}
+.navbar-light .navbar-toggler {
+  color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.68);
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.top-nav {
+  background: #000;
+  padding: 5px 0px;
+  transition: all ease-in-out 0.7s;
+}
+
+.top-nav .navbar-nav > li > .dropdown-menu {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  left: 0px;
+  padding: 10px 0 0 0;
+  background: #184168;
+  border-radius: 0 0 0 0;
+  box-shadow: 0 0 0 #000000;
+  border-width: 0;
+  min-width: 200px;
+  transition: all ease-in-out 0.7s;
+}
+.top-nav .navbar-nav > li > a:hover {
+  color: #56bfc7;
+}
+.top-nav .navbar-nav > li > .dropdown-menu .dropdown-item:hover {
+  color: #56bfc7;
+}
+
+.nav-interno,
+.nav-interno .navbar-nav > li > .dropdown-menu {
+  background: white;
+  transition: all ease-in-out 0.7s;
+}
+
+.nav-interno_home,
+.nav-interno_home .navbar-nav > li > .dropdown-menu {
+  background: transparent;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 );
+  transition: all ease-in-out 0.7s;
+}
+
+.nav-interno .navbar-nav > li a {
+  border-right: #3b3b3b 1px solid;
+  color: #3b3b3b !important;
+  transition: all ease-in-out 0.7s;
+}
+
+.nav-interno .navbar-nav > li:last-child a {
+  padding-right: 0px;
+  border-right: 0px solid transparent;
+}
+/* .scrolled > .navContent{
+transform: scale(0.8);
+} */
+.navbar-brand {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px !important;
+  text-shadow: 1px 1px 2px black;
+  padding: 2px;
+}
+
+.navbar-brand:hover {
+  color: rgb(26, 182, 26) !important;
+  text-decoration: underline;
+}
+
+.container {
+  width: 100%;
+  min-height: 5rem !important;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1300px !important;
+}
+
+ul {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.a-nav {
+  display: inline-block;
+  padding: 5px 0px;
+  margin: 0px 7px;
+  border-bottom: transparent 2px solid;
+  font-stretch: condensed !important;
+}
+.emoji-arg {
+  width: 45px;
+}
+
+h2{
+  font-family: "Rowdies", cursive;
+  font-size: 50px;
+}
+
+.container2{
+    margin: auto;
+    margin-top: 7rem;
+    /* display: table; */
+    background-color: #fff;
+    padding: 2rem;
+    margin-bottom: 5rem;
+    width: 100%;
+    border-radius: 5rem;
+  }
+ 
+  .right{
+    float:center;
+    display: table;
+    width: 100%;
+  }
+  .fa{
+    display: inline-block;
+  }
+
+  .has-feedback .form-control {
+      padding-right: 4.5px;
+  }
+  select[multiple], select[size] {
+      height: auto;
+  }
+  .form-control {
+      border-radius: 0;
+      box-shadow: none;
+      border-color: #d2d6de;
+  }
+  .form-control {
+      display: block;
+      width: 100%;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857143;
+      color: #555;
+      background-color: #fff;
+      background-image: none;
+      border: 1px solid #ccc;
+  }
+  label {
+    cursor: default;
+  }
+  label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+  /* input {
+    display: block;
+    width: 100%;
+    font-size: 14pt;
+    line-height: 28pt;
+    font-family: "Fjalla One";
+    margin-bottom: 28pt;
+    border: none;
+    border-bottom: 5px solid black;
+    background: #68dc03;
+    min-width: 250px;
+    padding-left: 5px;
+    outline: none;
+    color: black;
+  } */
+  
+
+
+  .text-center {
+      text-align: center;
+  }
+  .btn{
+    margin: 2 auto;
+    padding: 10px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    touch-action: manipulation;
+    margin-top: 50px;
+  }
+  a {
+      color: #3c8dbc;
+  }
+  a {
+      color: #337ab7;
+      text-decoration: none;
+  }
+
+  
+  .control-label{
+    float: left;
+  }
+  .form-horizontal .form-group {
+      margin-right: 20px;
+      margin-left: 15px;
+  }
+  .form-group {
+      margin-bottom: 10px;
+  }
+  
+  .buton {
+    background-color: #2dae02 !important;
+    border-color: rgb(1, 1, 1);
+    width: 25%;
+  
+  }
+  .btn {
+    border-radius: 5px;
+    box-shadow: none;
+    border: 2px solid ;
+  }
+  
+  .has-feedback {
+      position: relative;
+  }
+  
+  .left.box-primary {
+      border-top-color: #3c8dbc;
+      
+  }
+  .left {
+      position: relative;
+      border-radius: 15px;
+      background: #cdcdcd;
+      border-top: 3px solid #d2d6de;
+      margin-bottom: 5px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 3px;
+      border-bottom-left-radius: 3px;
+      padding: 10px;
+  }
+  @media screen and (min-width: 320px) and (max-width: 550px){
+    .buton{
+      width: 100%;
+    }
+    .form-horizontal .form-group {
+      margin-right: 10px;
+      margin-left: 5px;
+  }
+  .container2{
+    border-radius: 2rem;
+  }
+  }
+  @media screen and (min-width: 550px) and (max-width: 900px){
+    .buton{
+      width: 50%;
+    }
+  }
